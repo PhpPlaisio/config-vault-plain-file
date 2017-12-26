@@ -1,0 +1,6 @@
+/.idea/
+/bin/
+/composer.lock
+/test/report
+/test/config-vault.json
+/vendor/

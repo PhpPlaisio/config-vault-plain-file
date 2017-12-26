@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1514202910">
+  <project timestamp="1514202910">
+    <file name="/home/water/Projects/SetBased/php-abc-config-vault-plain-file/src/ConfigVault.php">
+      <metrics loc="50" ncloc="7" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <package name="Nahouw\Abc">
+      <file name="/home/water/Projects/SetBased/php-abc-config-vault-plain-file/src/FileConfigVault.php">
+        <class name="Nahouw\Abc\FileConfigVault" namespace="Nahouw\Abc">
+          <metrics complexity="12" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="32" coveredstatements="32" elements="37" coveredelements="37"/>
+        </class>
+        <line num="35" type="method" name="__construct" visibility="public" complexity="2" crap="2" count="8"/>
+        <line num="37" type="stmt" count="8"/>
+        <line num="39" type="stmt" count="8"/>
+        <line num="40" type="stmt" count="8"/>
+        <line num="42" type="stmt" count="1"/>
+        <line num="45" type="stmt" count="7"/>
+        <line num="46" type="stmt" count="7"/>
+        <line num="57" type="method" name="getValue" visibility="public" complexity="4" crap="4" count="6"/>
+        <line num="60" type="stmt" count="6"/>
+        <line num="62" type="stmt" count="2"/>
+        <line num="66" type="stmt" count="5"/>
+        <line num="68" type="stmt" count="3"/>
+        <line num="72" type="stmt" count="3"/>
+        <line num="74" type="stmt" count="1"/>
+        <line num="75" type="stmt" count="1"/>
+        <line num="76" type="stmt" count="1"/>
+        <line num="77" type="stmt" count="1"/>
+        <line num="80" type="stmt" count="2"/>
+        <line num="91" type="method" name="putValue" visibility="public" complexity="3" crap="3" count="7"/>
+        <line num="93" type="stmt" count="7"/>
+        <line num="95" type="stmt" count="2"/>
+        <line num="97" type="stmt" count="1"/>
+        <line num="100" type="stmt" count="1"/>
+        <line num="104" type="stmt" count="5"/>
+        <line num="108" type="stmt" count="6"/>
+        <line num="109" type="stmt" count="6"/>
+        <line num="111" type="stmt" count="6"/>
+        <line num="112" type="stmt" count="6"/>
+        <line num="121" type="method" name="unset" visibility="public" complexity="2" crap="2" count="2"/>
+        <line num="123" type="stmt" count="2"/>
+        <line num="125" type="stmt" count="1"/>
+        <line num="129" type="stmt" count="1"/>
+        <line num="132" type="stmt" count="2"/>
+        <line num="133" type="stmt" count="2"/>
+        <line num="139" type="method" name="save" visibility="private" complexity="1" crap="1" count="6"/>
+        <line num="141" type="stmt" count="6"/>
+        <line num="142" type="stmt" count="6"/>
+        <metrics loc="147" ncloc="78" classes="1" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="32" coveredstatements="32" elements="37" coveredelements="37"/>
+      </file>
+    </package>
+    <metrics files="2" loc="197" ncloc="85" classes="1" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="32" coveredstatements="32" elements="37" coveredelements="37"/>
+  </project>
+</coverage>

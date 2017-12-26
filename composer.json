@@ -1,0 +1,34 @@
+{
+  "name": "setbased/abc-config-vault-plain-file",
+  "description": "ABC-Framework: Plain File Config Vault",
+  "keywords": [
+    "ABC-Framework",
+    "Config",
+    "Vault"
+  ],
+  "type": "library",
+  "license": "MIT",
+  "require": {
+    "php": ">=7.0.0",
+    "setbased/abc": "^0.10.27",
+    "setbased/abc-config-vault": "^0.9.0",
+    "setbased/exception": "^1.0.0"
+  },
+  "require-dev": {
+    "phing/phing": "^2.0.0",
+    "phpunit/phpunit": "^6.0.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "SetBased\\Abc\\ConfigVault\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "SetBased\\Abc\\ConfigVault\\Test\\": "test/"
+    }
+  },
+  "config": {
+    "bin-dir": "bin/"
+  }
+}
