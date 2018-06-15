@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\ConfigVault\Test;
 
 use PHPUnit\Framework\TestCase;
@@ -49,19 +49,6 @@ class FileConfigVaultTest extends TestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Test vault with wrong permission mode.
-   *
-   * @expectedException \RuntimeException
-   */
-  public function testWrongMode()
-  {
-    chmod($this->path, 0640);
-
-    new FileConfigVault($this->path);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Test with getting non-existing key.
    *
    * @expectedException \RuntimeException
@@ -70,14 +57,14 @@ class FileConfigVaultTest extends TestCase
   {
     $vault1 = new FileConfigVault($this->path);
 
-    $vault1->putValue(__CLASS__, 'key1', 'value1');
-    $vault1->putValue(__CLASS__, 'key2', 'value2');
-    $vault1->putValue(__CLASS__, 'key3', 'value3');
+    $vault1->putString(__CLASS__, 'key1', 'value1');
+    $vault1->putString(__CLASS__, 'key2', 'value2');
+    $vault1->putString(__CLASS__, 'key3', 'value3');
 
     unset($vault1);
     $vault2 = new FileConfigVault($this->path);
 
-    $vault2->getValue(__CLASS__, 'key4');
+    $vault2->getString(__CLASS__, 'key4');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -90,14 +77,27 @@ class FileConfigVaultTest extends TestCase
   {
     $vault1 = new FileConfigVault($this->path);
 
-    $vault1->putValue(__CLASS__, 'key1', 'value1');
-    $vault1->putValue(__CLASS__, 'key2', 'value2');
-    $vault1->putValue(__CLASS__, 'key3', 'value3');
+    $vault1->putString(__CLASS__, 'key1', 'value1');
+    $vault1->putString(__CLASS__, 'key2', 'value2');
+    $vault1->putString(__CLASS__, 'key3', 'value3');
 
     unset($vault1);
     $vault2 = new FileConfigVault($this->path);
 
-    $vault2->getValue(__METHOD__, 'key1');
+    $vault2->getString(__METHOD__, 'key1');
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test vault with invalid JSON.
+   *
+   * @expectedException \RuntimeException
+   */
+  public function testInvalidJson()
+  {
+    file_put_contents($this->path, '[Ceci n\'est pas une pipe.}');
+
+    new FileConfigVault($this->path);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -108,81 +108,70 @@ class FileConfigVaultTest extends TestCase
   {
     $vault1 = new FileConfigVault($this->path);
 
-    $vault1->putValue(__CLASS__, 'key1', 'value1');
-    $vault1->putValue(__CLASS__, 'key2', 'value2');
-    $vault1->putValue(__CLASS__, 'key3', 'value3');
+    $vault1->putBool(__CLASS__, 'bool-true', true);
+    $vault1->putBool(__CLASS__, 'bool-false', false);
+    $vault1->putBool(__CLASS__, 'bool-null', null);
 
-    $vault1->putValue(__METHOD__, 'key1', 'value10');
-    $vault1->putValue(__METHOD__, 'key2', 'value20');
-    $vault1->putValue(__METHOD__, 'key3', 'value30');
+    $vault1->putFloat(__CLASS__, 'float-int', 1);
+    $vault1->putFloat(__CLASS__, 'float-pi', pi());
+    $vault1->putFloat(__CLASS__, 'float-null', null);
 
-    unset($vault1);
-    $vault2 = new FileConfigVault($this->path);
+    $vault1->putInt(__CLASS__, 'int1', 1);
+    $vault1->putInt(__CLASS__, 'int123', -123);
+    $vault1->putInt(__CLASS__, 'int-null', null);
 
-    self::assertSame('value10', $vault2->getValue(__METHOD__, 'key1'));
-    self::assertSame('value20', $vault2->getValue(__METHOD__, 'key2'));
-    self::assertSame('value30', $vault2->getValue(__METHOD__, 'key3'));
+    $vault1->putString(__CLASS__, 'hello-world', 'hello-world');
+    $vault1->putString(__CLASS__, 'string-int', -123);
+    $vault1->putString(__CLASS__, 'string-null', null);
 
-    self::assertSame('value1', $vault2->getValue(__CLASS__, 'key1'));
-    self::assertSame('value2', $vault2->getValue(__CLASS__, 'key2'));
-    self::assertSame('value3', $vault2->getValue(__CLASS__, 'key3'));
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Test with put and get array.
-   */
-  public function testPutAndGet02()
-  {
-    $vault1 = new FileConfigVault($this->path);
-
-    $data = ['key2' => 'value2',
-             'key1' => 'value1',
-             'key3' => 'value3'];
-    $vault1->putValue(__CLASS__, null, $data);
+    $vault1->putString(__METHOD__, 'key1', 'value10');
+    $vault1->putString(__METHOD__, 'key2', 'value20');
+    $vault1->putString(__METHOD__, 'key3', 'value30');
 
     unset($vault1);
     $vault2 = new FileConfigVault($this->path);
 
-    self::assertSame('value1', $vault2->getValue(__CLASS__, 'key1'));
-    self::assertSame('value2', $vault2->getValue(__CLASS__, 'key2'));
-    self::assertSame('value3', $vault2->getValue(__CLASS__, 'key3'));
+    self::assertSame(true, $vault2->getBool(__CLASS__, 'bool-true'));
+    self::assertSame(false, $vault2->getBool(__CLASS__, 'bool-false'));
+    self::assertSame(null, $vault2->getBool(__CLASS__, 'bool-null'));
 
-    self::assertEquals($data, $vault2->getValue(__CLASS__));
+    self::assertSame(1.0, $vault2->getFloat(__CLASS__, 'float-int'));
+    self::assertSame(pi(), $vault2->getFloat(__CLASS__, 'float-pi'));
+    self::assertSame(null, $vault2->getFloat(__CLASS__, 'float-null'));
+
+    self::assertSame(1, $vault2->getInt(__CLASS__, 'int1'));
+    self::assertSame(-123, $vault2->getInt(__CLASS__, 'int123'));
+    self::assertSame(null, $vault2->getInt(__CLASS__, 'int-null'));
+
+    self::assertSame('hello-world', $vault2->getString(__CLASS__, 'hello-world'));
+    self::assertSame('-123', $vault2->getString(__CLASS__, 'string-int'));
+    self::assertSame(null, $vault2->getString(__CLASS__, 'string-null'));
+
+    self::assertSame('value10', $vault2->getString(__METHOD__, 'key1'));
+    self::assertSame('value20', $vault2->getString(__METHOD__, 'key2'));
+    self::assertSame('value30', $vault2->getString(__METHOD__, 'key3'));
   }
-
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Put a non-array in a domain.
    *
-   * @expectedException \UnexpectedValueException
-   */
-  public function testPutInvalid01()
-  {
-    $vault1 = new FileConfigVault($this->path);
-
-    $vault1->putValue(__CLASS__, null, 'hello world');
-  }
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Test unsetting a single key-value pair.
    */
   public function testUnset01()
   {
     $vault1 = new FileConfigVault($this->path);
 
-    $vault1->putValue(__CLASS__, 'key1', 'value1');
-    $vault1->putValue(__CLASS__, 'key2', 'value2');
-    $vault1->putValue(__CLASS__, 'key3', 'value3');
+    $vault1->putString(__CLASS__, 'key1', 'value1');
+    $vault1->putString(__CLASS__, 'key2', 'value2');
+    $vault1->putString(__CLASS__, 'key3', 'value3');
 
-    $vault1->putValue(__METHOD__, 'key1', 'value10');
-    $vault1->putValue(__METHOD__, 'key2', 'value20');
-    $vault1->putValue(__METHOD__, 'key3', 'value30');
+    $vault1->putString(__METHOD__, 'key1', 'value10');
+    $vault1->putString(__METHOD__, 'key2', 'value20');
+    $vault1->putString(__METHOD__, 'key3', 'value30');
 
     unset($vault1);
     $vault2 = new FileConfigVault($this->path);
 
-    $vault2->unset(__CLASS__, 'key2');
+    $vault2->unsetKey(__CLASS__, 'key2');
 
     unset($vault2);
     $vault3 = new FileConfigVault($this->path);
@@ -190,7 +179,7 @@ class FileConfigVaultTest extends TestCase
     $data = ['key1' => 'value1',
              'key3' => 'value3'];
 
-    self::assertEquals($data, $vault3->getValue(__CLASS__));
+    self::assertEquals($data, $vault3->getDomain(__CLASS__));
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -203,18 +192,18 @@ class FileConfigVaultTest extends TestCase
   {
     $vault1 = new FileConfigVault($this->path);
 
-    $vault1->putValue(__CLASS__, 'key1', 'value1');
-    $vault1->putValue(__CLASS__, 'key2', 'value2');
-    $vault1->putValue(__CLASS__, 'key3', 'value3');
+    $vault1->putString(__CLASS__, 'key1', 'value1');
+    $vault1->putString(__CLASS__, 'key2', 'value2');
+    $vault1->putString(__CLASS__, 'key3', 'value3');
 
-    $vault1->putValue(__METHOD__, 'key1', 'value10');
-    $vault1->putValue(__METHOD__, 'key2', 'value20');
-    $vault1->putValue(__METHOD__, 'key3', 'value30');
+    $vault1->putString(__METHOD__, 'key1', 'value10');
+    $vault1->putString(__METHOD__, 'key2', 'value20');
+    $vault1->putString(__METHOD__, 'key3', 'value30');
 
     unset($vault1);
     $vault2 = new FileConfigVault($this->path);
 
-    $vault2->unset(__CLASS__);
+    $vault2->unsetDomain(__CLASS__);
 
     unset($vault2);
     $vault3 = new FileConfigVault($this->path);
@@ -223,9 +212,22 @@ class FileConfigVaultTest extends TestCase
              'key2' => 'value20',
              'key3' => 'value30'];
 
-    self::assertEquals($data, $vault3->getValue(__METHOD__));
+    self::assertEquals($data, $vault3->getDomain(__METHOD__));
 
-    $vault3->getValue(__CLASS__);
+    $vault3->getDomain(__CLASS__);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test vault with wrong permission mode.
+   *
+   * @expectedException \RuntimeException
+   */
+  public function testWrongMode()
+  {
+    chmod($this->path, 0640);
+
+    new FileConfigVault($this->path);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
