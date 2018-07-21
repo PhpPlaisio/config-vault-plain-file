@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace SetBased\Abc\ConfigVault\Test;
 
@@ -112,7 +113,7 @@ class FileConfigVaultTest extends TestCase
     $vault1->putBool(__CLASS__, 'bool-false', false);
     $vault1->putBool(__CLASS__, 'bool-null', null);
 
-    $vault1->putFloat(__CLASS__, 'float-int', 1);
+    $vault1->putFloat(__CLASS__, 'float-int', 1.0);
     $vault1->putFloat(__CLASS__, 'float-pi', pi());
     $vault1->putFloat(__CLASS__, 'float-null', null);
 
@@ -121,7 +122,7 @@ class FileConfigVaultTest extends TestCase
     $vault1->putInt(__CLASS__, 'int-null', null);
 
     $vault1->putString(__CLASS__, 'hello-world', 'hello-world');
-    $vault1->putString(__CLASS__, 'string-int', -123);
+    $vault1->putString(__CLASS__, 'string-int', '-123');
     $vault1->putString(__CLASS__, 'string-null', null);
 
     $vault1->putString(__METHOD__, 'key1', 'value10');
@@ -153,7 +154,6 @@ class FileConfigVaultTest extends TestCase
   }
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   *
    * Test unsetting a single key-value pair.
    */
   public function testUnset01()
