@@ -38,7 +38,7 @@ class FileConfigVaultTest extends TestCase
   /**
    * Creates and empty vault.
    */
-  public function setUp()
+  public function setUp(): void
   {
     if (is_file($this->path)) unlink($this->path);
 
@@ -51,10 +51,8 @@ class FileConfigVaultTest extends TestCase
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Test with getting non-existing key.
-   *
-   * @expectedException \RuntimeException
    */
-  public function testGetInvalid01()
+  public function testGetInvalid01(): void
   {
     $vault1 = new FileConfigVault($this->path);
 
@@ -65,16 +63,15 @@ class FileConfigVaultTest extends TestCase
     unset($vault1);
     $vault2 = new FileConfigVault($this->path);
 
+    $this->expectException(\RuntimeException::class);
     $vault2->getString(__CLASS__, 'key4');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Test with getting non-existing domain.
-   *
-   * @expectedException \RuntimeException
    */
-  public function testGetInvalid02()
+  public function testGetInvalid02(): void
   {
     $vault1 = new FileConfigVault($this->path);
 
@@ -85,19 +82,19 @@ class FileConfigVaultTest extends TestCase
     unset($vault1);
     $vault2 = new FileConfigVault($this->path);
 
+    $this->expectException(\RuntimeException::class);
     $vault2->getString(__METHOD__, 'key1');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Test vault with invalid JSON.
-   *
-   * @expectedException \RuntimeException
    */
-  public function testInvalidJson()
+  public function testInvalidJson(): void
   {
     file_put_contents($this->path, '[Ceci n\'est pas une pipe.}');
 
+    $this->expectException(\RuntimeException::class);
     new FileConfigVault($this->path);
   }
 
@@ -105,7 +102,7 @@ class FileConfigVaultTest extends TestCase
   /**
    * Test with simple put and get values to the vault.
    */
-  public function testPutAndGet01()
+  public function testPutAndGet01(): void
   {
     $vault1 = new FileConfigVault($this->path);
 
@@ -156,7 +153,7 @@ class FileConfigVaultTest extends TestCase
   /**
    * Test unsetting a single key-value pair.
    */
-  public function testUnset01()
+  public function testUnset01(): void
   {
     $vault1 = new FileConfigVault($this->path);
 
@@ -185,10 +182,8 @@ class FileConfigVaultTest extends TestCase
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Test unsetting a whole domain.
-   *
-   * @expectedException \RuntimeException
    */
-  public function testUnset02()
+  public function testUnset02(): void
   {
     $vault1 = new FileConfigVault($this->path);
 
@@ -214,19 +209,19 @@ class FileConfigVaultTest extends TestCase
 
     self::assertEquals($data, $vault3->getDomain(__METHOD__));
 
+    $this->expectException(\RuntimeException::class);
     $vault3->getDomain(__CLASS__);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Test vault with wrong permission mode.
-   *
-   * @expectedException \RuntimeException
    */
-  public function testWrongMode()
+  public function testWrongMode(): void
   {
     chmod($this->path, 0640);
 
+    $this->expectException(\RuntimeException::class);
     new FileConfigVault($this->path);
   }
 

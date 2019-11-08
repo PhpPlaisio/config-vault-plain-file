@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1532146917">
-  <project timestamp="1532146917">
+<coverage generated="1573221603">
+  <project timestamp="1573221603">
     <package name="SetBased\Abc\ConfigVault">
       <file name="/home/water/Projects/SetBased/php-abc-config-vault-plain-file/src/FileConfigVault.php">
         <class name="SetBased\Abc\ConfigVault\FileConfigVault" namespace="SetBased\Abc\ConfigVault">
-          <metrics complexity="29" methods="15" coveredmethods="15" conditionals="0" coveredconditionals="0" statements="44" coveredstatements="44" elements="59" coveredelements="59"/>
+          <metrics complexity="29" methods="15" coveredmethods="15" conditionals="0" coveredconditionals="0" statements="42" coveredstatements="42" elements="57" coveredelements="57"/>
         </class>
         <line num="35" type="method" name="__construct" visibility="public" complexity="4" crap="4" count="7"/>
         <line num="37" type="stmt" count="7"/>
@@ -52,8 +52,6 @@
         <line num="232" type="stmt" count="1"/>
         <line num="236" type="stmt" count="2"/>
         <line num="238" type="stmt" count="1"/>
-        <line num="239" type="stmt" count="1"/>
-        <line num="240" type="stmt" count="1"/>
         <line num="241" type="stmt" count="1"/>
         <line num="244" type="stmt" count="1"/>
         <line num="257" type="method" name="putValue" visibility="private" complexity="1" crap="1" count="5"/>
@@ -65,9 +63,9 @@
         <line num="272" type="method" name="save" visibility="private" complexity="1" crap="1" count="5"/>
         <line num="274" type="stmt" count="5"/>
         <line num="275" type="stmt" count="5"/>
-        <metrics loc="280" ncloc="107" classes="1" methods="15" coveredmethods="15" conditionals="0" coveredconditionals="0" statements="44" coveredstatements="44" elements="59" coveredelements="59"/>
+        <metrics loc="280" ncloc="107" classes="1" methods="15" coveredmethods="15" conditionals="0" coveredconditionals="0" statements="42" coveredstatements="42" elements="57" coveredelements="57"/>
       </file>
     </package>
-    <metrics files="1" loc="280" ncloc="107" classes="1" methods="15" coveredmethods="15" conditionals="0" coveredconditionals="0" statements="44" coveredstatements="44" elements="59" coveredelements="59"/>
+    <metrics files="1" loc="280" ncloc="107" classes="1" methods="15" coveredmethods="15" conditionals="0" coveredconditionals="0" statements="42" coveredstatements="42" elements="57" coveredelements="57"/>
   </project>
 </coverage>
