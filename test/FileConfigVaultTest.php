@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\ConfigVault\Test;
+namespace Plaisio\ConfigVault\Test;
 
 use PHPUnit\Framework\TestCase;
-use SetBased\Abc\ConfigVault\FileConfigVault;
+use Plaisio\ConfigVault\FileConfigVault;
 
 /**
  * Test cases for class FileConfigVault.

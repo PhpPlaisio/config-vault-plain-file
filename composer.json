@@ -1,8 +1,8 @@
 {
-  "name": "setbased/abc-config-vault-plain-file",
-  "description": "ABC-Framework: Plain File Config Vault",
+  "name": "plaisio/config-vault-plain-file",
+  "description": "PhpPlaisio: Plain File Config Vault",
   "keywords": [
-    "ABC-Framework",
+    "PhpPlaisio",
     "Config",
     "Vault"
   ],
@@ -10,7 +10,7 @@
   "require": {
     "php": ">=7.1.0",
     "ext-json": "*",
-    "setbased/abc-config-vault": "^1.0.0",
+    "plaisio/config-vault": "^2.0.0",
     "setbased/exception": "^2.0.0"
   },
   "require-dev": {
@@ -19,12 +19,12 @@
   },
   "autoload": {
     "psr-4": {
-      "SetBased\\Abc\\ConfigVault\\": "src/"
+      "Plaisio\\ConfigVault\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "SetBased\\Abc\\ConfigVault\\Test\\": "test/"
+      "Plaisio\\ConfigVault\\Test\\": "test/"
     }
   },
   "config": {

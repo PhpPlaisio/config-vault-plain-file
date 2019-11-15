@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\ConfigVault;
+namespace Plaisio\ConfigVault;
 
 use SetBased\Exception\RuntimeException;
 
