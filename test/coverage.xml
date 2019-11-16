@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1573813428">
-  <project timestamp="1573813428">
+<coverage generated="1573890104">
+  <project timestamp="1573890104">
     <package name="Plaisio\ConfigVault">
       <file name="/home/water/Projects/Plaisio/config-vault-plain-file/src/FileConfigVault.php">
         <class name="Plaisio\ConfigVault\FileConfigVault" namespace="Plaisio\ConfigVault">
