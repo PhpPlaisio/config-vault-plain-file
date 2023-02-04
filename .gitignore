@@ -5,5 +5,6 @@
 /custom.task.properties
 /custom.type.properties
 /test/config-vault.json
-/test/report
+/test/coverage.xml
+/test/report/
 /vendor/
