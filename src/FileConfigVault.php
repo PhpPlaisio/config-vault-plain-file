@@ -15,16 +15,16 @@ class FileConfigVault implements ConfigVault
   /**
    * The data in the vault.
    *
-   * @var array
+   * @var array|null
    */
-  private $data;
+  private ?array $data;
 
   /**
-   * The path where the configuration vault is been stored.
+   * The path where the configuration vault is being stored.
    *
    * @var string
    */
-  private $path;
+  private string $path;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -56,7 +56,7 @@ class FileConfigVault implements ConfigVault
    * @param string $domain The name of the domain.
    * @param string $key    The key
    *
-   * @return bool
+   * @return bool|null
    */
   public function getBool(string $domain, string $key): ?bool
   {
@@ -89,7 +89,7 @@ class FileConfigVault implements ConfigVault
    * @param string $domain The name of the domain.
    * @param string $key    The key
    *
-   * @return float
+   * @return float|null
    */
   public function getFloat(string $domain, string $key): ?float
   {
@@ -103,7 +103,7 @@ class FileConfigVault implements ConfigVault
    * @param string $domain The name of the domain.
    * @param string $key    The key
    *
-   * @return int
+   * @return int|null
    */
   public function getInt(string $domain, string $key): ?int
   {
@@ -117,7 +117,7 @@ class FileConfigVault implements ConfigVault
    * @param string $domain The name of the domain.
    * @param string $key    The key
    *
-   * @return string
+   * @return string|null
    */
   public function getString(string $domain, string $key): ?string
   {
@@ -224,7 +224,7 @@ class FileConfigVault implements ConfigVault
    *
    * @return mixed
    */
-  private function getValue(string $domain, string $key)
+  private function getValue(string $domain, string $key): mixed
   {
     // Test domain exists.
     if (!isset($this->data[$domain]))
@@ -254,7 +254,7 @@ class FileConfigVault implements ConfigVault
    *
    * @return void
    */
-  private function putValue(string $domain, string $key, $value): void
+  private function putValue(string $domain, string $key, mixed $value): void
   {
     $this->data[$domain][$key] = $value;
 
