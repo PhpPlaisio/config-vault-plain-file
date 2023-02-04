@@ -2,6 +2,8 @@
 /.phpunit.result.cache
 /bin/
 /composer.lock
-/test/report
+/custom.task.properties
+/custom.type.properties
 /test/config-vault.json
+/test/report
 /vendor/
